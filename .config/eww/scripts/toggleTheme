@@ -1,0 +1,100 @@
+#!/bin/sh
+LOCK=/home/vixima/.config/eww/temp/theme.lock
+CONFDIR=/home/vixima/.config
+
+yuck() {
+    if [[ "$1" == "-light" ]]; then
+        sed -i '' -e 's/30,31,36/203,204,206/g' $CONFDIR/eww/controlcentre.yuck
+    elif [[ "$1" == "-dark" ]]; then
+        sed -i '' -e 's/203,204,206/30,31,36/g' $CONFDIR/eww/controlcentre.yuck
+    fi
+}
+
+css() {
+    if [[ "$1" == "-light" ]]; then
+        sed -i '' -e 's/camelliahopeDark/camelliahopeLight/' $CONFDIR/eww/eww.scss
+    elif [[ "$1" == "-dark" ]]; then
+        sed -i '' -e 's/camelliahopeLight/camelliahopeDark/' $CONFDIR/eww/eww.scss
+    fi
+}
+
+term() {
+    if [[ "$1" == "-light" ]]; then
+        sed -i '' -e 's/camelliahopeDark/camelliahopeLight/' $CONFDIR/wezterm/wezterm.lua
+    elif [[ "$1" == "-dark" ]]; then
+        sed -i '' -e 's/camelliahopeLight/camelliahopeDark/' $CONFDIR/wezterm/wezterm.lua
+    fi
+}
+
+rofi() {
+    if [[ "$1" == "-light" ]]; then
+        sed -i '' -e 's/camelliahopeDark/camelliahopeLight/' $CONFDIR/rofi/theme.rasi
+    elif [[ "$1" == "-dark" ]]; then
+        sed -i '' -e 's/camelliahopeLight/camelliahopeDark/' $CONFDIR/rofi/theme.rasi
+    fi
+}
+
+dunst() {
+    if [[ "$1" == "-light" ]]; then
+        sed -i '' -e 's/background = "#17181C"/background = "#E4E5E7"/g' $CONFDIR/dunst/dunstrc
+        sed -i '' -e 's/foreground = "#E4E5E7"/foreground = "#17181C"/g' $CONFDIR/dunst/dunstrc
+        pkill dunst
+        dunst &
+        dunstctl rule dnd disable &
+    elif [[ "$1" == "-dark" ]]; then
+        sed -i '' -e 's/background = "#E4E5E7"/background = "#17181C"/g' $CONFDIR/dunst/dunstrc
+        sed -i '' -e 's/foreground = "#17181C"/foreground = "#E4E5E7"/g' $CONFDIR/dunst/dunstrc
+        pkill dunst
+        dunst &
+        dunstctl rule dnd disable &
+    fi
+}
+
+gtk() {
+    if [[ "$1" == "-light" ]]; then
+        gradience-cli apply -n CamelliaHopeLight --gtk both
+        gsettings set org.gnome.desktop.interface cursor-theme Bibata-CamelliaHopeLight
+        sed -i '' -e 's/gtk-application-prefer-dark-theme=true/gtk-application-prefer-dark-theme=false/' $CONFDIR/gtk-3.0/settings.ini
+    elif [[ "$1" == "-dark" ]]; then
+        gradience-cli apply -n CamelliaHopeDark --gtk both
+        gsettings set org.gnome.desktop.interface cursor-theme Bibata-CamelliaHopeDark
+        sed -i '' -e 's/gtk-application-prefer-dark-theme=false/gtk-application-prefer-dark-theme=true/' $CONFDIR/gtk-3.0/settings.ini
+    fi
+
+}
+
+obsidian() {
+    if [[ "$1" == "-light" ]]; then
+        sed -i '' -e 's/"theme": "obsidian",/"theme": "moonstone",/' /home/vixima/wenomechainsama/.obsidian/appearance.json
+    elif [[ "$1" == "-dark" ]]; then
+        sed -i '' -e 's/"theme": "moonstone",/"theme": "obsidian",/' /home/vixima/wenomechainsama/.obsidian/appearance.json
+    fi
+
+}
+
+if [ -f "$LOCK" ]; then
+    rm -rf "$LOCK"
+    yuck -dark
+    css -dark
+    term -dark
+    rofi -dark
+    dunst -dark
+    gtk -dark
+    obsidian -dark
+    eww update lightToggled=""
+    nitrogen --set-zoom-fill /home/vixima/Wallpapers/LUTGEN/wallhaven-5gm153.png
+
+    else
+    touch "$LOCK"
+    yuck -light
+    css -light
+    term -light
+    rofi -light
+    dunst -light
+    gtk -light
+    obsidian -light
+    eww update lightToggled="pinkBG"
+    nitrogen --set-zoom-fill /home/vixima/Wallpapers/LUTGEN/peakviviwall.png
+fi
+
+

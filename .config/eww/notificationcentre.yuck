@@ -1,0 +1,92 @@
+(defwidget ncNotifs []
+  (box 
+    :orientation "v"
+    :spacing 8
+    :space-evenly false
+    (for entry in {dunst_history["data"][0]}
+      (eventbox
+        :onclick "dunstctl history-rm ${entry["id"]["data"]}"
+        (box
+          :class "ncNotification"
+          :orientation "v"
+          :spacing 0
+          :space-evenly false
+          (label
+            :halign "start"
+            :limit-width 30
+            :class "pinkText"
+            :text {entry["summary"]["data"]}
+          )
+          (label
+            :halign "start"
+            :limit-width 50
+            :wrap true
+            :text {entry["body"]["data"]}
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget ncButtons []
+  (box
+    :orientation "h"
+    :spacing 8
+    :space-evenly true
+    :vexpand false
+    (eventbox
+      :class "${clearHover} ccButton"
+      :width 73
+      :height 28
+      :hexpand true
+      :onclick "dunstctl history-clear"
+      :onhover "${EWW_CMD} update clearHover=buttonHover"
+      :onhoverlost "${EWW_CMD} update clearHover="
+      :cursor "pointer"
+      (label
+        :text " Clear"
+      )
+    )
+    (eventbox
+      :class "${snoozeToggled} ${snoozeHover} ccButton"
+      :width 73
+      :height 28
+      :hexpand true
+      :onclick "sh ./scripts/toggleDND"
+      :onhover "${EWW_CMD} update snoozeHover=buttonHover"
+      :onhoverlost "${EWW_CMD} update snoozeHover="
+      :cursor "pointer"
+      (label
+        :text " Snooze"
+      )
+    )
+  )
+)
+
+(defwidget notificationCentre []
+  (box
+    :class "ncContainer"
+    :vexpand true
+  (box
+    :orientation "v"
+    :spacing 8
+    :space-evenly false
+    :valign "end"
+    (ncNotifs)
+    (ncButtons)
+  )
+  )
+)
+
+(defwindow notificationcentre [wm]
+  :windowtype "dock"
+  :monitor 0
+  :geometry (geometry :x { wm == "hyprland" ? "10px" : "56px"}
+                      :y { wm == "hyprland" ? "10px" : "-10px"}
+                      :width "247px"
+                      :height "300px"
+                      :anchor "bottom left"
+                      :reserve (struts :side "left" :distance "10px"))
+  (notificationCentre)
+)

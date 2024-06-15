@@ -1,0 +1,159 @@
+// Unsetting everything. Aw shit, here we go again.
+* {
+  all: unset;
+  font-family: "satori, Cozette";
+  font-size: 13px;
+  transition: background-color 200ms cubic-bezier(0.2, 0.0, 0, 1.0) 0s;
+}
+
+// Colours
+@import 'colours/camelliahopeDark.scss'
+
+.bar {
+    border-radius: 36px;
+    //box-shadow: 0px 0px 16px -1px rgba(0, 0, 0, 0.25);
+}
+
+.barContainer {
+    color: $fg;
+    background-color: $bg;
+    border-radius: 36px;
+    padding: 6px;
+}
+
+.barCCButton {
+    background-color: $midBG;
+    border-radius: 36px;
+    min-width: 24px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.barCCButton > box {
+    background-color: $lightBG;
+}
+
+.barWorkspaces {
+    background-color: $midBG;
+    border-radius: 36px;
+    min-width: 24px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.barInfo {
+    background-color: $midBG;
+    border-radius: 36px;
+    min-width: 24px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.ccContainer {
+    color: $fg;
+    background-color: $bg;
+    border-radius: 14px;
+    padding: 6px;
+    //box-shadow: 0px 0px 16px -1px rgba(0, 0, 0, 0.25);
+}
+
+.ccPFP {
+    background-image: url("assets/pfp.png");
+    background-size: cover;
+    border-radius: 8px;
+    
+}
+
+.ccUserInfo {
+    background-color: $midBG;
+    border-radius: 8px;
+    padding: 10px 12px 10px 12px;
+}
+
+.ccButton {
+    background-color: $midBG;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.ccMusicInfo {
+    background-color: $midBG;
+    border-radius: 8px;
+    padding: 10px 12px 10px 12px;
+}
+
+.ccMusicStatus {
+    background-color: $midBG;
+    border-radius: 8px;
+    padding: 6px 6px 6px 6px;
+}
+
+.ccMusicControls {
+}
+
+.ccToggles {
+}
+
+.buttonHover {
+    background-color: $lightBG;
+}
+
+.pinkText, .focused {
+    color: $pink;
+}
+
+.pinkBG {
+    background-color: $pink;
+}
+
+.altText, .unoccupied {
+    color: $darkGrey;
+}
+
+.volume {
+    background-color: $midBG;
+    border-radius: 24px;
+    margin: 6px;
+}
+.barSlider {
+    & scale trough {
+    all: unset;
+    background-color: $darkGrey;
+    min-height: 110px;
+    min-width: 12px;
+    border-radius: 12px;
+    & highlight {
+      all: unset;
+      border-radius: 12px;
+      background-color: $pink;
+    }
+  }
+}
+
+.ncContainer {
+    color: $fg;
+    background-color: $bg;
+    border-radius: 14px;
+    padding: 6px;
+    //box-shadow: 0px 0px 16px -1px rgba(0, 0, 0, 0.25);
+}
+
+.ncButton {
+    background-color: $midBG;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.ncNotification {
+    background-color: $midBG;
+    border-radius: 8px;
+    padding: 10px 12px 10px 12px;
+}
+
+menubar {
+    margin-top: -4px;
+    margin-bottom: -8px;
+    menuitem {
+        padding: 8px 0px;
+    }
+}

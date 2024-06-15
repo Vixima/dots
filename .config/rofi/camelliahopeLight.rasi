@@ -1,0 +1,18 @@
+* {
+    bg:        rgba(228, 229, 231, 0.9);
+    midBG:     rgba(203, 204, 206, 0.8);
+    lightBG:   rgba(176, 177, 180, 0.7);
+    darkGrey:  #8F9093;
+    lightGrey: #333438;
+    darkFG:    #26272B;
+    midFG:     #1E1F24;
+    fg:        #17181C;
+    pink:      #FA3867;
+    orange:    #F3872F;
+    gold:      #FEBD16;
+    lime:      #3FD43B;
+    turquoise: #47E7CE;
+    blue:      #53ADE1;
+    violet:    #AD60FF;
+    red:       #FC3F2C;
+}

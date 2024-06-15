@@ -1,0 +1,38 @@
+#!/bin/sh
+
+battery() {
+	cat /sys/class/power_supply/BAT1/capacity | sed 's/$//'
+}
+
+battery_status() {
+    cat /sys/class/power_supply/BAT1/status | grep -q 'Charging'
+}
+
+battery_icon() {
+	if $(battery_status); then
+        echo 
+    else
+        if [[ $(battery) -le "10" ]]; then
+            echo 
+        elif [[ $(battery) -le "25" ]]; then
+            echo 
+
+        elif [[ $(battery) -le "50" ]]; then
+            echo 
+
+        elif [[ $(battery) -le "75" ]]; then
+            echo 
+
+        elif [[ $(battery) -le "100" ]]; then
+            echo 
+        fi
+    fi
+}
+
+if [[ "$1" == "-battery" ]]; then
+	battery
+elif [[ "$1" == "-icon" ]]; then
+	battery_icon
+elif [[ "$1" == "-status" ]]; then
+	battery_status
+fi

@@ -1,0 +1,6 @@
+#!/bin/sh
+eww=/home/vixima/.local/bin/eww
+
+sleep 0.2 && $eww open lockscreen &
+i3lock -i /home/vixima/Wallpapers/LUTGEN/dominic-swain-bBQSP2JrrBY-unsplash.png --no-unlock-indicator --nofork; $eww close lockscreen &
+$eww close lockscreen 

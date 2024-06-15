@@ -1,0 +1,13 @@
+#!/bin/sh
+LOCK=/home/vixima/.config/eww/temp/caffeine.lock
+eww=/home/vixima/.local/bin/eww
+
+if [ -f "$LOCK" ]; then
+    rm -rf "$LOCK"
+    xset s on
+    $eww update caffeineToggled=""
+else 
+    touch "$LOCK"
+    xset s off
+    $eww update caffeineToggled="pinkBG"
+fi

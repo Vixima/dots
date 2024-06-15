@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+aplay /home/vixima/.config/eww/assets/vixui-boot.wav 2>/dev/null &

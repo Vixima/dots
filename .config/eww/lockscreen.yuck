@@ -1,0 +1,57 @@
+(defwidget lockscreen []
+  (box
+    :class "ccContainer"
+  (box
+    :class "ccInfo"
+    :halign "center"
+    :valign "start"
+    :space-evenly false
+    :spacing 8
+    (box
+      :class "ccPFP"
+      :width 64
+      :height 64
+    )
+    (box
+      :class "ccUserInfo"
+      :width 127
+      :space-evenly false
+      :orientation "v"
+      :valign "start"
+      :halign "center"
+      :height 64
+      (label
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        :class "pinkText"
+        :text "${userName} "
+      )
+      (label
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        :text "${date}"
+      )
+      (label
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        :text "${hour}:${minute} ${period}"
+      )
+    )
+)
+)
+)
+(defwindow lockscreen
+  :stacking "overlay"
+  :windowtype "dock"
+  :namespace "overlay"
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "211px"
+                      :height "76px"
+                      :anchor "center")
+  (lockscreen)
+)

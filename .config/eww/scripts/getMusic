@@ -1,0 +1,64 @@
+#!/bin/sh
+
+player() {
+    playerctl --follow metadata -f '{{playerName}}'
+}
+albumArt() {
+	playerctl metadata -f '{{mpris:artUrl}}'
+}
+artDL() {
+	ART=$(albumArt)
+    if [ "$ART" == "" ]; then
+        echo ~/.config/eww/assets/nocover.png
+    else
+        curl -s -o ~/.config/eww/assets/cover.png "$ART"
+	    echo ~/.config/eww/assets/cover.png
+    fi
+}
+title() {
+    playerctl --follow metadata -f '{{title}}'
+}
+artist() {
+    playerctl --follow metadata -f '{{artist}}'
+}
+album() {
+    playerctl --follow metadata -f '{{album}}'
+}
+status() {
+    playerctl --follow metadata -f '{{status}}'
+}
+statusIcon() {
+    playerctl status --format '{{emoji(status)}}' | sed -e "s/▶//" -e "s/⏸//" -e "s/⏹//"
+}
+position() {
+    playerctl --follow metadata -f '{{duration(position)}}'
+}
+notify() {
+    notify-send -i $(artDL) "$(playerctl metadata title)" "$(playerctl metadata artist) - $(playerctl metadata album)" &> /dev/null
+}
+
+
+if [[ "$1" == "-player" ]]; then
+	player
+elif [[ "$1" == "-art" ]]; then
+	albumArt 
+elif [[ "$1" == "-artDL" ]]; then
+	artDL 
+elif [[ "$1" == "-title" ]]; then
+	title
+elif [[ "$1" == "-artist" ]]; then
+	artist
+elif [[ "$1" == "-album" ]]; then
+	album
+elif [[ "$1" == "-status" ]]; then
+	status
+elif [[ "$1" == "-statusIcon" ]]; then
+	statusIcon
+elif [[ "$1" == "-position" ]]; then
+	position
+elif [[ "$1" == "-notify" ]]; then
+	notify
+elif [[ "$1" == "" ]]; then
+	title
+fi
+

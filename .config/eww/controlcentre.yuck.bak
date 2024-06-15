@@ -1,0 +1,185 @@
+(defwidget userInfo []
+      (box
+      :class "ccInfo"
+      :halign "center"
+      :valign "start"
+      :space-evenly false
+      :spacing 8
+          (box
+          :class "ccPFP"
+          :width 64
+          :height 64
+          )
+          (box
+          :class "ccUserInfo"
+          :width 127
+          :space-evenly false
+          :orientation "v"
+          :spacing 2
+          :valign "center"
+          :height 64
+            (label
+            :justify "left"
+            :halign "start"
+            :valign "center"
+            :class "pinkText"
+            :text "${userName}"
+            )
+            (label
+            :justify "left"
+            :halign "start"
+            :valign "center"
+            :text "${hostName}"
+            )
+            (label
+            :justify "left"
+            :halign "start"
+            :valign "center"
+            :text "Uptime: ${upTime}"
+            )
+          )
+          (box
+          :orientation "v"
+          :space-evenly false
+          :spacing 8
+            (eventbox
+            :width 28
+            :height 28
+            :class "ccButton"
+              (label
+              :text "⏻"
+              )
+            )
+            (eventbox
+            :width 28
+            :height 28
+            :class "ccButton"
+              (label
+              :text ""
+              )
+            )
+          )
+      )
+)
+  
+(defwidget musicInfo []
+   (box
+      :class "ccMusicInfo"
+      :halign "center"
+      :width 235
+      :height 64
+      :style "background-image: linear-gradient(90deg, rgba(30,31,36,1) 0%, rgba(30,31,36,0.50) 50%, rgba(30,31,36,0.50) 100%), url('${musicArt}'); background-size: 49%; background-position: right center; background-repeat: no-repeat;"     
+      (box 
+      :orientation "v"
+      :halign "start"
+      :valign "center"
+      :space-evenly false
+        (label
+        :class "pinkText"
+        :text "${musicTitle}"
+        :limit-width 24
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        )
+        (label
+        :text "${musicArtist}"
+        :limit-width 24
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        )
+        (label
+        :text "${musicPlayer}"
+        :limit-width 24
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        )
+      )
+   )
+)
+
+(defwidget musicControls []
+   (box
+      :class "ccMusicControls"
+      :halign "center"
+      :spacing 8
+      :space-evenly false
+      (eventbox
+        :class "ccButton"
+        :width 28
+        :height 28
+        :onclick "playerctl previous"
+        (label
+          :text ""
+        )
+      )
+      (eventbox
+        :class "ccButton"
+        :width 28
+        :height 28
+        :onclick "playerctl play-pause"
+        (label
+          :text "${musicStatusIcon}"
+        )
+      )
+      (eventbox
+        :class "ccButton"
+        :width 28
+        :height 28
+        :onclick "playerctl next"
+        (label
+          :text ""
+        )
+      )
+      (box
+        :class "ccMusicStatus"
+        :width 127
+        :height 28
+        :space-evenly false
+        :spacing 8
+        :orientation "h"
+        :halign "center"
+        (label
+          :text "${musicStatus}"
+          :halign "center"
+        )
+        (label
+          :class "pinkText"
+          :text "♥"
+          :halign "center"
+        )
+        (label
+          :text "${musicPosition}"
+          :halign "center"
+        )
+      )
+
+   )
+)
+
+(defwidget controlcentre []
+    (box 
+      :class "ccContainer"
+      :orientation "v"
+      :spacing 8
+      :space-evenly false
+        (userInfo)
+        (musicInfo)
+        (musicControls)
+    )
+)
+  
+  (defwindow controlcentre
+    :windowtype "dock"
+    :monitor 0
+    :geometry (geometry :x "56px"
+                        :y "10px"
+                        :width "247px"
+                        :height "180px"
+                        :anchor "top left"
+                        :reserve (struts :side "left" :distance "10px"))
+    (controlcentre)
+  )
+ 

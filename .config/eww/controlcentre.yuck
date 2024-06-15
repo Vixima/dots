@@ -1,0 +1,319 @@
+(defwidget userInfo []
+  (box
+    :class "ccInfo"
+    :halign "center"
+    :valign "start"
+    :space-evenly false
+    :spacing 8
+    (box
+      :class "ccPFP"
+      :width 64
+      :height 64
+    )
+    (centerbox
+      :class "ccUserInfo"
+      :width 127
+      :orientation "v"
+      :valign "start"
+      :halign "center"
+      :height 64
+      (label
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        :class "pinkText"
+        :text "${userName}"
+      )
+      (label
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        :text "${hostName}"
+      )
+      (label
+        :justify "left"
+        :halign "start"
+        :valign "center"
+        :text "Uptime: ${upTime}"
+      )
+    )
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+      (eventbox
+        :width 28
+        :height 28
+        :class "${powerHover} ccButton"
+        :onclick ""
+        :onhover "${EWW_CMD} update powerHover=buttonHover"
+        :onhoverlost "${EWW_CMD} update powerHover="
+        :cursor "pointer"
+        (label
+          :text "⏻"
+        )
+      )
+      (eventbox
+        :width 28
+        :height 28
+        :class "${lockHover} ccButton"
+        :onclick "sh ./scripts/lockScreen &"
+        :onhover "${EWW_CMD} update lockHover=buttonHover"
+        :onhoverlost "${EWW_CMD} update lockHover="
+        :cursor "pointer"
+        (label
+          :text ""
+        )
+      )
+    )
+  )
+)
+
+(defwidget musicInfo []
+  (centerbox
+    :class "ccMusicInfo"
+    :orientation "v"
+    :halign "center"
+    :width 235
+    :height 64
+    :style "background-image: linear-gradient(90deg, rgba(30,31,36,1) 0%, rgba(30,31,36,0.50) 50%, rgba(30,31,36,0.50) 100%), url('${musicArt}'); background-size: 49%; background-position: right center; background-repeat: no-repeat;"     
+    (label
+      :class "pinkText"
+      :text "${musicTitle}"
+      :limit-width 24
+      :justify "left"
+      :halign "start"
+      :valign "center"
+    )
+    (label
+      :text "${musicArtist}"
+      :limit-width 24
+      :justify "left"
+      :halign "start"
+      :valign "center"
+    )
+    (label
+      :class "altText"
+      :text "${musicPlayer}"
+      :limit-width 24
+      :justify "left"
+      :halign "start"
+      :valign "center"  
+    )
+  )
+)
+
+(defwidget musicControls []
+  (box
+    :class "ccMusicControls"
+    :halign "center"
+    :spacing 8
+    :space-evenly false
+    (eventbox
+      :class "${prevHover} ccButton"
+      :width 28
+      :height 28
+      :onclick "playerctl previous"
+      :onhover "${EWW_CMD} update prevHover=buttonHover"
+      :onhoverlost "${EWW_CMD} update prevHover="
+      :cursor "pointer"
+      (label
+        :text ""
+      )
+    )
+    (eventbox
+      :class "${ppHover} ccButton"
+      :width 28
+      :height 28
+      :onclick "playerctl play-pause"
+      :onhover "${EWW_CMD} update ppHover=buttonHover"
+      :onhoverlost "${EWW_CMD} update ppHover="
+      :cursor "pointer"
+      (label
+        :text "${musicStatusIcon}"
+      )
+    )
+    (eventbox
+      :class "${nextHover} ccButton"
+      :width 28
+      :height 28
+      :onclick "playerctl next"
+      :onhover "${EWW_CMD} update nextHover=buttonHover"
+      :onhoverlost "${EWW_CMD} update nextHover="
+      :cursor "pointer"
+      (label
+        :text ""
+      )
+    )
+    (box
+      :class "ccMusicStatus"
+      :width 127
+      :height 28
+      :space-evenly false
+      :spacing 8
+      :orientation "h"
+      :halign "center"
+      (box
+        :space-evenly false
+        :hexpand true
+        :halign "center"
+        :spacing 8
+        (label
+          :text "${musicStatus}"
+          :halign "start"
+        )
+        (label
+          :class "pinkText"
+          :text "♥"
+          :halign "center"
+        )
+        (label
+          :text "${musicPosition}"
+          :halign "end"
+        )
+      )
+    )
+  )
+)
+
+(defwidget actualToggles []
+  (box
+    :class "ccToggles"
+    :halign "center"
+    :spacing 8
+    :space-evenly false
+    (box
+      :orientation "v"
+      (eventbox
+        :class "${wifiToggled} ${wifiHover} ccButton"
+        :width 73
+        :height 28
+        :onclick "sh ~/.config/eww/scripts/getWifi -toggle &"
+        :onhover "${EWW_CMD} update wifiHover=buttonHover"
+        :onhoverlost "${EWW_CMD} update wifiHover="
+        :cursor "pointer"
+        :tooltip "Wifi Toggle"
+        (label
+          :text "${wifiIcon}"
+        )
+      )
+    )
+    (box
+      :orientation "v"
+      (eventbox
+        :class "${bluetoothToggled} ${bluetoothHover} ccButton"
+        :width 73
+        :height 28
+        :onclick "sh ~/.config/eww/scripts/toggleBluetooth"
+        :onhover "${EWW_CMD} update bluetoothHover=buttonHover"
+        :onhoverlost "${EWW_CMD} update bluetoothHover="
+        :cursor "pointer"
+        :tooltip "Bluetooth Toggle"
+        (label
+          :text "${bluetoothIcon}"
+        )
+      )
+    )
+    (box
+      :orientation "v"
+      (eventbox
+        :class "${compToggled} ${compHover} ccButton"
+        :width 73
+        :height 28
+        :onclick "sh ~/.config/eww/scripts/toggleComp"
+        :onhover "${EWW_CMD} update compHover=buttonHover"
+        :onhoverlost "${EWW_CMD} update compHover="
+        :cursor "pointer"
+        :tooltip "Compositor Toggle"
+        (label
+          :text "✭"
+        )
+      )
+    )
+  )
+)
+
+(defwidget miscToggles []
+  (box
+    :class "ccToggles"
+    :halign "center"
+    :spacing 8
+    :space-evenly false
+    (box
+      :orientation "v"
+      (eventbox
+        :class "${lightToggled} ${lightHover} ccButton"
+        :width 73
+        :height 28
+        :onclick "sh ~/.config/eww/scripts/toggleTheme"
+        :onrightclick "sh ~/.config/eww/scripts/toggleTransparency"
+        :onhover "${EWW_CMD} update lightHover=buttonHover"
+        :onhoverlost "${EWW_CMD} update lightHover="
+        :cursor "pointer"
+        :tooltip "Theme Swap"
+        (label
+          :text "${themeIcon}"
+        )
+      )
+    )
+    (box
+      :orientation "v"
+      (eventbox
+        :class "${caffeineToggled} ${caffeineHover} ccButton"
+        :width 73
+        :height 28
+        :onclick "sh ~/.config/eww/scripts/toggleCaffeine"
+        :onhover "${EWW_CMD} update caffeineHover=buttonHover"
+        :onhoverlost "${EWW_CMD} update caffeineHover="
+        :cursor "pointer"
+        :tooltip "Caffeine"
+        (label
+          :text ""
+        )
+      )
+    )
+    (box
+      :orientation "v"
+      (eventbox
+        :class "${redshiftToggled} ${redshiftHover} ccButton"
+        :width 73
+        :height 28
+        :onclick "sh ~/.config/eww/scripts/toggleRedshift"
+        :onhover "${EWW_CMD} update redshiftHover=buttonHover"
+        :onhoverlost "${EWW_CMD} update redshiftHover="
+        :cursor "pointer"
+        :tooltip "Redshift"
+        (label
+          :text ""
+        )
+      )
+    )
+  )
+)
+
+(defwidget controlcentre []
+  (box 
+    :class "ccContainer"
+    :orientation "v"
+    :spacing 8
+    :space-evenly false
+    (userInfo)
+    (musicInfo)
+    (musicControls)
+    (actualToggles)
+    (miscToggles)
+  )
+)
+
+(defwindow controlcentre [wm]
+  :windowtype "dock"
+  :monitor 0
+  :geometry (geometry :x { wm == "hyprland" ? "10px" : "56px"}
+                      :y "10px"
+                      :width "247px"
+                      :height "180px"
+                      :anchor "top left"
+                      :reserve (struts :side "left" :distance "10px"))
+  (controlcentre)
+)
+

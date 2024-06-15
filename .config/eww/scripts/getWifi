@@ -1,0 +1,34 @@
+#! /bin/sh
+eww=/home/vixima/.local/bin/eww
+
+wifi() {
+	nmcli | grep "^wl" | sed 's/wlan0: connected to \|wlan0: Connected to\|wlan0: //'
+}
+
+wifi_status() {
+    if [[ $(wifi) = "disconnected" ]]; then 
+        echo "睊"
+    elif [[ $(wifi) = "unavailable" ]]; then 
+        echo "睊"
+    else
+        echo "直"
+    fi
+}
+
+wifiToggle() {
+    if [[ $(wifi) = "unavailable" ]]; then
+        nmcli radio wifi on
+        $eww update wifiToggled=pinkBG
+    else
+        nmcli radio wifi off
+        $eww update wifiToggled=
+    fi
+}
+
+if [[ "$1" == "-wifi" ]]; then
+	wifi
+elif [[ "$1" == "-status" ]]; then
+	wifi_status
+ elif [[ "$1" == "-toggle" ]]; then
+     wifiToggle
+fi

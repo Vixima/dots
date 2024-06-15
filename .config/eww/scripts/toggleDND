@@ -1,0 +1,15 @@
+#!/bin/sh
+LOCK=/home/vixima/.config/eww/temp/dnd.lock
+eww=/home/vixima/.local/bin/eww
+
+if [ -f "$LOCK" ]; then
+    rm -rf "$LOCK"
+    $eww update snoozeToggled=""
+    dunstctl rule dnd disable
+    dunstctl rule sound enable
+else 
+    touch "$LOCK"
+    $eww update snoozeToggled="pinkBG"
+    dunstctl rule dnd enable
+    dunstctl rule sound disable
+fi

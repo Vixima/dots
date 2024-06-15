@@ -1,0 +1,14 @@
+; Variables
+(include "/home/vixima/.config/eww/vars.yuck")
+; Bar
+(include "/home/vixima/.config/eww/bar.yuck")
+; Volume Slider
+(include "/home/vixima/.config/eww/volume.yuck")
+; Control Centre
+(include "/home/vixima/.config/eww/controlcentre.yuck")
+; Notifications
+;(include "/home/vixima/.config/eww/notifications.yuck")
+; Notification Centre
+(include "/home/vixima/.config/eww/notificationcentre.yuck")
+; Lock Screen
+(include "/home/vixima/.config/eww/lockscreen.yuck")

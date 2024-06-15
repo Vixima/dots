@@ -1,0 +1,94 @@
+(defpoll minute :interval "5s"
+    "date '+%M'")
+(defpoll hour :interval "5s"
+	"date '+%I'")
+(defpoll period :interval "5s"
+    "date '+%p'")
+(defpoll date :interval "5s"
+    "date '+%B %d'")
+(defpoll battery :interval "1s"
+  "~/.config/eww/scripts/getBat -battery")
+(defpoll batteryIcon :interval "1s"
+  "~/.config/eww/scripts/getBat -icon")
+(defpoll volume :interval "1s"
+    "~/.config/eww/scripts/getVol -volume")
+(defpoll volumeIcon :interval "1s"
+    "~/.config/eww/scripts/getVol -icon")
+(defpoll wifi :interval "1s"
+    "~/.config/eww/scripts/getWifi -wifi")
+(defpoll wifiIcon :interval "1s"
+    "~/.config/eww/scripts/getWifi -status")
+(deflisten musicTitle 
+    "~/.config/eww/scripts/getMusic")
+(deflisten musicAlbum
+    "~/.config/eww/scripts/getMusic -album")
+(deflisten musicArtist :initial "Nothing playing." 
+    "~/.config/eww/scripts/getMusic -artist")
+(defpoll musicArt :interval "1s"
+    "~/.config/eww/scripts/getMusic -artDL")
+(deflisten musicPlayer
+    "~/.config/eww/scripts/getMusic -player")
+(deflisten musicStatus
+    "~/.config/eww/scripts/getMusic -status")
+(defpoll musicStatusIcon :interval "250ms"
+    "~/.config/eww/scripts/getMusic -statusIcon")
+(deflisten musicPosition
+    "~/.config/eww/scripts/getMusic -position")
+(defpoll userName :interval "1s"
+    "~/.config/eww/scripts/getInfo -user")
+(defpoll hostName :interval "1s"
+    "~/.config/eww/scripts/getInfo -host")
+(defpoll themeIcon :interval "1s"
+    "[ -f ~/.config/eww/temp/theme.lock ] && echo  || echo ")
+(defpoll upTime :interval "1m"
+    "~/.config/eww/scripts/getInfo -uptime")
+(deflisten workspaceList :initial "[]"
+    "~/.config/eww/scripts/getWorkspace")
+(defpoll dunst_history :interval "250ms"
+  "dunstctl history")
+(defvar bluetoothIcon
+  "")
+(defvar ccHover
+    "")
+(defvar powerHover
+    "")
+(defvar lockHover
+    "")
+(defvar prevHover
+    "")
+(defvar ppHover
+    "")
+(defvar nextHover
+    "")
+(defvar wifiHover
+    "")
+(defvar bluetoothHover
+    "")
+(defvar compHover
+    "")
+(defvar redshiftHover
+    "")
+(defvar caffeineHover
+    "")
+(defvar lightHover
+    "")
+(defvar snoozeHover
+    "")
+(defvar clearHover
+    "")
+(defvar wifiToggled
+    "pinkBG")
+(defvar bluetoothToggled
+    "pinkBG")
+(defvar compToggled
+    "pinkBG")
+(defvar redshiftToggled
+    "")
+(defvar caffeineToggled
+    "")
+(defvar lightToggled
+    "")
+(defvar snoozeToggled
+    "")
+(defvar volumeSliderReveal
+    "false")

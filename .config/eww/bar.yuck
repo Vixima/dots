@@ -1,0 +1,113 @@
+(defwidget left []
+  (box
+    :class "${ccHover} barCCButton"
+    :halign "center"
+    :valign "start"
+    (eventbox
+      :onclick "sh ~/.config/eww/scripts/toggleCC"
+      :onhover "${EWW_CMD} update ccHover=buttonHover"
+      :onhoverlost "${EWW_CMD} update ccHover="
+      :cursor "pointer"
+      (label
+        :text ""
+      )
+    )
+  )
+)
+
+(defwidget center []
+  (box
+    :class "barWorkspaces"
+    :halign "center"
+    (box
+      :orientation "v"
+      :spacing 6
+      (for wk in workspaceList
+        (label
+             :class "${wk.state}"
+             :text "${wk.icon}"
+        )
+      )
+    )
+  )
+)
+
+(defwidget right []
+  (box
+    :class "barInfo"
+    :orientation "v"
+    :valign "end"
+    :halign "center"
+    :spacing 16
+    :space-evenly false
+    (systray
+      :icon-size 11
+      :orientation "v"
+      :spacing 16
+    )
+    (eventbox
+      :onclick "sh ~/.config/eww/scripts/toggleVolSlider"
+      (label
+        :style "margin-right:1px;"
+        :text "${volumeIcon}"
+        :tooltip "${volume}"
+      )
+    )
+    (label
+      :style "margin-right:1px;"
+      :text "${wifiIcon}"
+      :tooltip "${wifi}"
+    )
+    (label
+      :text "${batteryIcon}"
+      :tooltip "${battery}%"
+    )
+    (box
+      :class "bar-time"
+      :orientation "v"
+      :spacing 4
+      :space-evenly false
+      (label
+        :text "${hour}"
+      )
+      (label
+        :text "${minute}"
+      )
+      (label
+        :text "${period}"
+      )
+    )
+    (eventbox
+      :onclick "sh ~/.config/eww/scripts/toggleNC"
+      (label
+        :style "margin-right:1px;"
+        :text ""
+      )
+    )
+  )
+)
+
+(defwidget bar []
+  (centerbox 
+    :class "barContainer"
+    :orientation "v"
+    (left)
+    (center)
+    (right)
+  )
+)
+
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "10px"
+                      :y "0%"
+                      :width "36px"
+                      :height "1060px"
+                      :anchor "left center"
+                      :reserve (struts :side "left" :distance "10px"))
+  :stacking "bg"
+  :exclusive true
+  :windowtype "desktop"
+  :wm-ignore false
+  (bar)
+)

@@ -1,0 +1,15 @@
+#!/bin/sh
+LOCK=/home/vixima/.config/eww/temp/bluetooth.lock
+eww=/home/vixima/.local/bin/eww
+
+if [ -f "$LOCK" ]; then
+    rm -rf "$LOCK"
+    $eww update bluetoothToggled="pinkBG"
+    $eww update bluetoothIcon=""
+    bluetoothctl power on
+else
+    touch "$LOCK"
+    $eww update bluetoothToggled=""
+    $eww update bluetoothIcon=""
+    bluetoothctl power off
+fi

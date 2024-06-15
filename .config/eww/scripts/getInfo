@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [[ "$1" == "-user" ]]; then
+	echo "$USER"
+elif [[ "$1" == "-host" ]]; then
+	hostnamectl hostname
+elif [[ "$1" == "-uptime" ]]; then
+    uptime -p | sed -e 's/...//;s/ day\| days/d/;s/ hour\| hours/h/;s/ minute\| minutes/m/;s/,[^,]*//2'
+fi
+

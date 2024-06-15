@@ -1,0 +1,32 @@
+#!/bin/sh
+
+volume() {
+    if amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $4 }' | grep -q 'on'; then
+    amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1 | sed 's/$//'
+    else
+    echo "0"
+    fi
+}
+volume_status() {
+    if amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $4 }' | grep -q 'on'; then
+    echo "on"
+    else
+    echo "off"
+    fi
+}
+volume_icon() {
+    if [[ $(volume_status) = "off" ]]; then
+        echo "婢"
+    elif [[ $(volume) -le "0" ]]; then
+        echo ""
+    elif [[ $(volume) -le "50" ]]; then
+        echo ""
+    elif [[ $(volume) -le "100" ]]; then
+        echo ""
+    fi
+}
+if [[ "$1" == "-volume" ]]; then
+	volume
+elif [[ "$1" == "-icon" ]]; then
+	volume_icon
+fi

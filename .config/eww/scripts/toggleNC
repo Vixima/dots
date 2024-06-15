@@ -1,0 +1,16 @@
+#!/bin/sh
+LOCK=/home/vixima/.config/eww/temp/nc.lock
+eww=/home/vixima/.local/bin/eww
+
+if [ -f "$LOCK" ]; then
+    rm -rf "$LOCK"
+    $eww close notificationcentre
+else 
+    touch "$LOCK"
+    if [ $GDMSESSION = "hyprland" ]; then
+        $eww open notificationcentre --arg wm=hyprland
+    else
+        $eww open notificationcentre --arg wm=bspwm
+    fi
+
+fi

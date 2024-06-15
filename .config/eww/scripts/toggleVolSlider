@@ -1,0 +1,11 @@
+#!/bin/sh
+LOCK=/home/vixima/.config/eww/temp/volume.lock
+eww=/home/vixima/.local/bin/eww
+
+if [ -f "$LOCK" ]; then
+    rm -rf "$LOCK"
+    $eww close volume
+else 
+    touch "$LOCK"
+    $eww open volume
+fi

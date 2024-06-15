@@ -1,0 +1,13 @@
+#!/bin/sh
+LOCK=/home/vixima/.config/eww/temp/compositor.lock
+eww=/home/vixima/.local/bin/eww
+
+if [ -f "$LOCK" ]; then
+    rm -rf "$LOCK"
+    $eww update compToggled="pinkBG"
+    compfy & 
+else 
+    touch "$LOCK"
+    $eww update compToggled=""
+    pkill compfy &
+fi

@@ -1,0 +1,4 @@
+#!/bin/sh
+eww=/home/vixima/.local/bin/eww
+
+swaylock -i /home/vixima/Wallpapers/LUTGEN/dominic-swain-bBQSP2JrrBY-unsplash.png --no-unlock-indicator -f

@@ -1,0 +1,31 @@
+(defwidget volume []
+  (box
+  :class "barSlider"
+  :height 122
+  :width 24
+    (scale
+    :orientation "v"
+    :flipped true
+    :height 110
+    :width 12
+    :min 0
+    :max 101
+    :onchange "amixer set Master {}%"
+    :value "${volume}"
+    )
+  )
+)
+
+(defwindow volume
+    :monitor 0
+    :geometry (geometry :x "56px"
+                        :y "-170px"
+                        :width "24px"
+                        :height "122px"
+                        :anchor "bottom left")
+    :stacking "bg"
+    :exclusive true
+    :windowtype "dock"
+    :wm-ignore false
+    (volume)
+)
