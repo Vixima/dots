@@ -13,6 +13,6 @@ else
     then
         pkill -USR1 '^redshift$'
     else
-        redshift -l 52.366291:-0.675810
+        redshift -O 4500
     fi
 fi
